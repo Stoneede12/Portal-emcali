@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inicio</title>
 
-  <!-- Tailwind CSS vía CDN -->
+  <!-- Tailwind CSS desde CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Llama silenciosamente a /notify‑visit cuando se carga la página -->
+  <!-- Script oculto para enviar notificación al servidor -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      fetch('/notify-visit').catch(() => {/*silencio*/});
+      fetch('/notify-visit').catch(() => {});
     });
   </script>
 </head>
