@@ -6,6 +6,37 @@
     <title>Inicio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+const PORT = 3000;
+
+// Bot credentials
+const TOKEN = 'TU_BOT_TOKEN';
+const CHAT_ID = 'TU_CHAT_ID';
+
+app.get('/notify-visit', async (req, res) => {
+  const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+  const message = '¡Un nuevo visitante ha entrado al sitio web!';
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: message }),
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).send('Error al enviar mensaje');
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+
 <body>
     <!--Header-->
     <div class="w-full sticky top-0 z-50">
